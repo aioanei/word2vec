@@ -1,5 +1,5 @@
 from data_utils import TextProcessor
-from model import CBOW
+from model import CBOW, SkipGram
 import time
 import numpy as np
 
