@@ -17,11 +17,11 @@ def train_cbow(vocab_size, dim, lr, epochs, proc, text):
             loss = model.backward(context, target)
             total_loss += loss
             pairs_count += 1
-            if (i + 1) % 10000 == 0:
-                print(f"  Epoch {epoch + 1}/{epochs} | Processed {i + 1} batches")
+            if (i + 1) % 1000 == 0:
+                print(f"Epoch {epoch + 1}/{epochs} | Processed {i + 1} batches")
         avg_loss = total_loss / pairs_count
         epoch_losses.append(avg_loss)
-        print(f"  Epoch {epoch + 1}/{epochs} | Average Loss: {avg_loss:.4f}")
+        print(f"Epoch {epoch + 1}/{epochs} | Average Loss: {avg_loss:.4f}")
 
     elapsed = time.time() - start_time
     print(f"CBOW training time: {elapsed:.2f} seconds")
@@ -42,10 +42,10 @@ def train_skipgram(vocab_size, dim, lr, epochs, proc, text):
             total_loss += loss
             pairs_count += 1
             if (i + 1) % 1000 == 0:
-                print(f"  Epoch {epoch + 1}/{epochs} | Processed {i + 1} batches")
+                print(f"Epoch {epoch + 1}/{epochs} | Processed {i + 1} batches")
         avg_loss = total_loss / pairs_count
         epoch_losses.append(avg_loss)
-        print(f"  Epoch {epoch + 1}/{epochs} | Average Loss: {avg_loss:.4f}")
+        print(f"Epoch {epoch + 1}/{epochs} | Average Loss: {avg_loss:.4f}")
 
     elapsed = time.time() - start_time
     print(f"Skip-Gram training time: {elapsed:.2f} seconds")
@@ -69,8 +69,8 @@ def main():
     sg_model, sg_time, sg_losses = train_skipgram(vocab_size, DIM, LR, EPOCHS, proc, text)
 
     print("\nComparison")
-    print(f"CBOW Training time: {cbow_time:.2f}s Final Avg Loss: {cbow_losses[-1]:.4f}")
-    print(f"Skip-Gram Training time: {sg_time:.2f}s Final Avg Loss: {sg_losses[-1]:.4f}")
+    print(f"CBOW Training time: {cbow_time:.2f}s Final Avg Loss: {cbow_losses[-1]:.4f} (Window: {WINDOW}, Dim: {DIM}, Epochs: {EPOCHS})")
+    print(f"Skip-Gram Training time: {sg_time:.2f}s Final Avg Loss: {sg_losses[-1]:.4f} (Window: {WINDOW}, Dim: {DIM}, Epochs: {EPOCHS})")
 
     np.save("embeddings_cbow.npy", cbow_model.W1)
     np.save("embeddings_skipgram.npy", sg_model.W1)
