@@ -4,10 +4,10 @@ import time
 import numpy as np
 
 def main():
-    WINDOW = 3
+    WINDOW = 5
     DIM = 100
     EPOCHS = 5
-    LIMIT = 10000
+    LIMIT = 1000000000
     LR = 0.05
 
     proc = TextProcessor(WINDOW)
