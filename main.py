@@ -1,5 +1,6 @@
 from data_utils import TextProcessor
 from model import CBOW, SkipGram
+from evaluation import evaluate
 import time
 import numpy as np
 
@@ -17,7 +18,7 @@ def train_cbow(vocab_size, dim, lr, epochs, proc, text):
             loss = model.backward(context, target)
             total_loss += loss
             pairs_count += 1
-            if (i + 1) % 1000 == 0:
+            if (i + 1) % 10000 == 0:
                 print(f"Epoch {epoch + 1}/{epochs} | Processed {i + 1} batches")
         avg_loss = total_loss / pairs_count
         epoch_losses.append(avg_loss)
@@ -41,7 +42,7 @@ def train_skipgram(vocab_size, dim, lr, epochs, proc, text):
             loss = model.backward(target, context)
             total_loss += loss
             pairs_count += 1
-            if (i + 1) % 1000 == 0:
+            if (i + 1) % 10000 == 0:
                 print(f"Epoch {epoch + 1}/{epochs} | Processed {i + 1} batches")
         avg_loss = total_loss / pairs_count
         epoch_losses.append(avg_loss)
@@ -55,7 +56,7 @@ def main():
     WINDOW = 5
     DIM = 100
     EPOCHS = 5
-    LIMIT = 10000  # limit number of tokens for faster training
+    LIMIT = 10000 # limit number of tokens for faster training
     LR = 0.05
 
     proc = TextProcessor(WINDOW)
@@ -76,6 +77,9 @@ def main():
     np.save("embeddings_skipgram.npy", sg_model.W1)
     np.savez("metadata.npz", word2idx=proc.word2idx, idx2word=proc.idx2word)
     print("\nEmbeddings and metadata saved.")
+
+    evaluate("CBOW", cbow_model.W1, proc.word2idx, proc.idx2word)
+    evaluate("Skip-Gram", sg_model.W1, proc.word2idx, proc.idx2word)
 
 if __name__ == "__main__":
     main()

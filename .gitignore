@@ -8,3 +8,4 @@ embeddings.npy
 embeddings_skipgram.npy
 __pycache__/test_models.cpython-313-pytest-9.0.2.pyc
 embeddings_cbow.npy
+__pycache__/evaluation.cpython-313.pyc
