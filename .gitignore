@@ -5,3 +5,6 @@ metadata.npz
 __pycache__/model.cpython-313.pyc
 __pycache__/trainer.cpython-313.pyc
 embeddings.npy
+embeddings_skipgram.npy
+__pycache__/test_models.cpython-313-pytest-9.0.2.pyc
+embeddings_cbow.npy

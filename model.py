@@ -48,12 +48,15 @@ class SkipGram (Word2VecModel):
         return self.y_pred
     def backward(self, target_idx, context_indices):
         total_loss = 0
-        dL_dh = np.zeros((1, self.d_dims))
+        dL_dh = np.zeros((1, self.embedding_dim))
+        dw2 = np.zeros_like(self.W2)
+
         for c_idx in context_indices:
             e = self.y_pred.copy()
             e[0, c_idx] -= 1
-            self.W2 -= self.lr * np.dot(self.h.T, e)
+            dw2 += np.dot(self.h.T, e)
             dL_dh += np.dot(e, self.W2.T)
             total_loss -= np.log(self.y_pred[0, c_idx] + 1e-10)
         self.W1[target_idx] -= self.lr * dL_dh.flatten()
+        self.W2 -= self.lr * dw2
         return total_loss / len(context_indices)
