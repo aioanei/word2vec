@@ -1,3 +1,7 @@
 __pycache__/data_utils.cpython-313.pyc
 text8.zip
 text8
+metadata.npz
+__pycache__/model.cpython-313.pyc
+__pycache__/trainer.cpython-313.pyc
+embeddings.npy

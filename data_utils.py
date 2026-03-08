@@ -8,7 +8,7 @@ class TextProcessor:
         self.word2idx = {}
         self.idx2word = {}
         self.vocab_size = 0
-    def download_text (self):
+    def download_text (self, limit):
         # using this dataset for word embedding training because 
         # it doesn't require any preprocessing
         url = "http://mattmahoney.net/dc/text8.zip"
@@ -19,7 +19,7 @@ class TextProcessor:
                 z.extractall()
         with open("text8", 'r') as f:
             text = f.read().split()
-        return text
+        return text[:limit]
     def build_vocab(self, text):
         # sorting for better indexing and reproducibility
         unique_words = sorted(list(set(text)))
