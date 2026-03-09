@@ -102,5 +102,5 @@ def sanity_check():
     print(f"SkipGram | h shape: {h.shape} | loss: {loss:.4f}")
 
 if __name__ == "__main__":
-    sanity_check()
+    # sanity_check()
     main()
