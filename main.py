@@ -81,5 +81,26 @@ def main():
     evaluate("CBOW", cbow_model.W1, proc.word2idx, proc.idx2word)
     evaluate("Skip-Gram", sg_model.W1, proc.word2idx, proc.idx2word)
 
+def sanity_check():
+    print("\nSanity Check")
+    vocab_size = 10
+    embed_dim = 5
+    lr = 0.01
+
+    # CBOW
+    cbow = CBOW(vocab_size, embed_dim, lr)
+    context = [0, 1, 2]
+    target = 5
+    h = cbow.forward(context)
+    loss = cbow.backward(context, target)
+    print(f"CBOW  | h shape: {h.shape} | loss: {loss:.4f}")
+
+    # SkipGram
+    sg = SkipGram(vocab_size, embed_dim, lr)
+    h = sg.forward(target)
+    loss = sg.backward(target, context)
+    print(f"SkipGram | h shape: {h.shape} | loss: {loss:.4f}")
+
 if __name__ == "__main__":
+    sanity_check()
     main()
