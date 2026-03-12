@@ -1,6 +1,6 @@
 # Word2Vec from Scratch
 
-Implementation of Word2Vec (CBOW and Skip-Gram) using only NumPy — no ML frameworks.
+Implementation of Word2Vec (CBOW and Skip-Gram) using only NumPy, no ML frameworks.
 
 ## Architecture
 
